@@ -2,35 +2,29 @@
 
 ---
 
-## Dependencias y como correr
+# Respuestas a preguntas
 
-Se puede usar Google Colab o usar un entorno virtual.
+## Parte 1:
 
-```bash
-pip install virtualenv
-```
+- Describa en una frase la diferencia entre los modelos discriminativos y los generativos
+  R// Un modelo discriminativo aprende la probabilidad P(y | x) y se especializa en distinguir o clasificar muestras por ejemplo, decir “esta imagen es un 5”, mientras que un modelo generativo aprende la distribución conjunta P(x) (o P(x | y)) y puede muestrear nuevos datos que se parezcan a los reales.
 
-Con venv
+  
+- Explique como el concepto de MinMax se aplica a los GAN
+  R// En las GAN se plantea un juego de suma cero entre dos redes: el discriminador D trata de maximizar su habilidad para asignar 1 a muestras reales y 0 a las generadas, mientras que el generador G trata de minimizar esa misma habilidad de D (es decir, maximizar la probabilidad de que D clasifique sus muestras como reales).
+  Formalmente:
+  $$
+  \min_{G}\,\max_{D}\; 
+  \mathbb{E}_{x \sim p_{\mathrm{real}}}\bigl[\log D(x)\bigr]
+  \;+\;
+  \mathbb{E}_{z \sim p_{z}}\bigl[\log\bigl(1 - D(G(z))\bigr)\bigr].
+  $$
 
-```bash
-python -m venv venv
-source venv/bin/activate
-```
+  
+- Describa lo que se está observando en la imagen GIF que se generó
+  R// El GIF despliega, época a época, cómo las muestras que genera G (puntos coloreados) van pasando de una nube completamente desordenada a distribuirse progresivamente sobre la curva (x₁, sin(x₁)), imitando la forma de los datos reales. Al principio son aleatorias; hacia las últimas épocas van “alineándose” a la senoidal.
 
-Dentro del entorno virtual:
-
-```bash
-pip install jupyterlab
-```
-
-Instalar librerías:
-```bash
-pip install -r requirements.txt
-```
-
-
-Levanta el servidor:
-
-```bash
-jupyter lab
-```
+  
+- ¿Cree que se ha creado un buen modelo? ¿Por qué?
+  R// En términos cualitativos, sí: las muestras finales cubren razonablemente bien la forma senoidal original, lo que significa que G ha aprendido la distribución subyacente.
+  Sin embargo, aún hay zonas poco cubiertas (p.ej. alrededor de los extremos de la curva) y cierta dispersión, lo que sugiere que podría mejorarse ajustando hiperparámetros (arquitectura, tasa de aprendizaje, balance de entrenamiento D vs. G) para obtener una cobertura más uniforme y reducir el ruido en la generación.
