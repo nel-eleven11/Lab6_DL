@@ -13,12 +13,13 @@
 - Explique como el concepto de MinMax se aplica a los GAN
   R// En las GAN se plantea un juego de suma cero entre dos redes: el discriminador D trata de maximizar su habilidad para asignar 1 a muestras reales y 0 a las generadas, mientras que el generador G trata de minimizar esa misma habilidad de D (es decir, maximizar la probabilidad de que D clasifique sus muestras como reales).
   Formalmente:
-  $$
-  \min_{G}\,\max_{D}\; 
-  \mathbb{E}_{x \sim p_{\mathrm{real}}}\bigl[\log D(x)\bigr]
-  \;+\;
-  \mathbb{E}_{z \sim p_{z}}\bigl[\log\bigl(1 - D(G(z))\bigr)\bigr].
-  $$
+  
+$$
+\min_{G}\,\max_{D}\; 
+\mathbb{E}_{x \sim p_{\mathrm{real}}}\bigl[\log D(x)\bigr]
+\;+\;
+\mathbb{E}_{z \sim p_{z}}\bigl[\log\bigl(1 - D(G(z))\bigr)\bigr].
+$$
 
   
 - Describa lo que se está observando en la imagen GIF que se generó
